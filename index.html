@@ -1,3 +1,101 @@
-<script>
-    location.href = "signup.html";
-</script>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStore | Cửa hàng công nghệ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html">⚡ TechStore</a>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="#products">Sản phẩm</a>
+      <a href="#cart">Giỏ hàng 🛒</a>
+      <a href="login.html" id="loginLink">Đăng nhập</a>
+      <a href="signup.html" id="signupLink">Đăng ký</a>
+      <button id="themeBtn" class="theme-btn" type="button">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">TECHNOLOGY FOR EVERYONE</span>
+        <h1>Nâng cấp trải nghiệm <span>công nghệ.</span></h1>
+        <p>Khám phá điện thoại, laptop và phụ kiện công nghệ dành cho bạn.</p>
+        <a href="#products" class="btn">Khám phá ngay →</a>
+      </div>
+      <div class="hero-art">💻<span>📱</span>🎧</div>
+    </section>
+
+    <section class="shop-section" id="products">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">BỘ SƯU TẬP</p>
+          <h2>Sản phẩm nổi bật</h2>
+          <p class="muted">Tìm thiết bị phù hợp với bạn.</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input id="searchInput" type="search" placeholder="🔍 Tìm sản phẩm...">
+
+        <select id="categoryFilter">
+          <option value="all">Tất cả danh mục</option>
+          <option value="phone">Điện thoại</option>
+          <option value="laptop">Laptop</option>
+          <option value="tablet">Máy tính bảng</option>
+          <option value="audio">Tai nghe</option>
+          <option value="accessory">Phụ kiện</option>
+          <option value="watch">Đồng hồ</option>
+        </select>
+
+        <select id="sortSelect">
+          <option value="default">Sắp xếp mặc định</option>
+          <option value="low">Giá thấp đến cao</option>
+          <option value="high">Giá cao đến thấp</option>
+          <option value="name">Tên A–Z</option>
+        </select>
+      </div>
+
+      <p id="productStatus" class="muted" aria-live="polite"></p>
+      <div id="productGrid" class="product-grid">
+        <p>Đang tải sản phẩm...</p>
+      </div>
+    </section>
+
+    <section class="cart-panel" id="cart">
+      <div class="cart-heading">
+        <div>
+          <p class="eyebrow">ĐƠN HÀNG CỦA BẠN</p>
+          <h2>🛒 Giỏ hàng <span id="cartCount">0</span></h2>
+        </div>
+        <button id="clearCartBtn" class="btn btn-outline" type="button">
+          Xóa giỏ hàng
+        </button>
+      </div>
+
+      <div id="cartItems">
+        <p class="muted">Giỏ hàng đang trống.</p>
+      </div>
+
+      <div class="cart-total">
+        <span>Tổng cộng</span>
+        <strong id="cartTotal">0 ₫</strong>
+      </div>
+      <p class="muted small">Đây là website demo, chưa xử lý thanh toán thật.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo footer-logo" href="index.html">⚡ TechStore</a>
+    <p>Công nghệ cho cuộc sống hiện đại.</p>
+    <p class="small">© 2026 TechStore — Dự án học tập.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

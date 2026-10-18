@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - TechStore</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>⚡ TechStore</h1>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="login.html">Đăng nhập</a>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <h2>Tạo tài khoản</h2>
+
+        <form id="signupForm">
+            <label for="signupUsername">Tên tài khoản</label>
+            <input id="signupUsername" type="text"
+                   required minlength="3" autocomplete="username">
+
+            <label for="signupEmail">Email</label>
+            <input id="signupEmail" type="email"
+                   required autocomplete="email">
+
+            <label for="signupPassword">Mật khẩu</label>
+            <input id="signupPassword" type="password"
+                   required minlength="6" autocomplete="new-password">
+
+            <label for="confirmPassword">Nhập lại mật khẩu</label>
+            <input id="confirmPassword" type="password"
+                   required minlength="6" autocomplete="new-password">
+
+            <p id="signupMessage" class="message"></p>
+            <button type="submit">Tạo tài khoản</button>
+        </form>
+
+        <p>Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+        <p><a href="index.html">← Quay lại cửa hàng</a></p>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
