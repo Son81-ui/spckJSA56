@@ -1,109 +1,114 @@
 
-const STORAGE_KEY = "techstore_users";
+const USERS_KEY = "techstore_users";
 
 function getUsers() {
-    try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-    } catch {
-        return {};
+  try {
+    const users = JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+
+    if (users && typeof users === "object" && !Array.isArray(users)) {
+      return users;
     }
+
+    return {};
+  } catch {
+    return {};
+  }
 }
 
 function showMessage(id, message, success = false) {
-    const element = document.getElementById(id);
+  const element = document.getElementById(id);
+  if (!element) return;
 
-    if (!element) return;
-
-    element.textContent = message;
-    element.classList.toggle("success", success);
+  element.textContent = message;
+  element.classList.toggle("success", success);
 }
 
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
-    signupForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+  signupForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-        const username = document.getElementById("signupUsername").value.trim();
-        const email = document.getElementById("signupEmail").value.trim();
-        const password = document.getElementById("signupPassword").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
+    const username = document.getElementById("signupUsername").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-        const users = getUsers();
-        const key = username.toLowerCase();
+    const users = getUsers();
+    const key = username.toLowerCase();
 
-        if (username.length < 3) {
-            showMessage("signupMessage", "Tên tài khoản cần ít nhất 3 ký tự.");
-            return;
-        }
+    if (username.length < 3) {
+      showMessage("signupMessage", "Tên tài khoản cần ít nhất 3 ký tự.");
+      return;
+    }
 
-        if (password.length < 6) {
-            showMessage("signupMessage", "Mật khẩu cần ít nhất 6 ký tự.");
-            return;
-        }
+    if (password.length < 6) {
+      showMessage("signupMessage", "Mật khẩu cần ít nhất 6 ký tự.");
+      return;
+    }
 
-        if (password !== confirmPassword) {
-            showMessage("signupMessage", "Mật khẩu nhập lại không khớp.");
-            return;
-        }
+    if (password !== confirmPassword) {
+      showMessage("signupMessage", "Hai mật khẩu không khớp.");
+      return;
+    }
 
-        if (users[key]) {
-            showMessage("signupMessage", "Tên tài khoản đã tồn tại.");
-            return;
-        }
+    if (users[key]) {
+      showMessage("signupMessage", "Tên tài khoản đã tồn tại.");
+      return;
+    }
 
-        users[key] = {
-            username: username,
-            email: email,
-            password: password
-        };
+    users[key] = {
+      username: username,
+      email: email,
+      password: password
+    };
 
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
-        } catch {
-            showMessage("signupMessage", "Không thể lưu tài khoản.");
-            return;
-        }
+    try {
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    } catch {
+      showMessage("signupMessage", "Không thể lưu tài khoản trên trình duyệt.");
+      return;
+    }
 
-        showMessage("signupMessage", "Đăng ký thành công!", true);
-        signupForm.reset();
+    showMessage("signupMessage", "Đăng ký thành công!", true);
+    signupForm.reset();
 
-        setTimeout(function () {
-            window.location.href = "login.html";
-        }, 1000);
-    });
+    setTimeout(function () {
+      window.location.href = "login.html";
+    }, 1000);
+  });
 }
 
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-        const username = document.getElementById("loginUsername").value.trim();
-        const password = document.getElementById("loginPassword").value;
-        const users = getUsers();
-        const user = users[username.toLowerCase()];
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const users = getUsers();
+    const user = users[username.toLowerCase()];
 
-        if (!user || user.password !== password) {
-            showMessage(
-                "loginMessage",
-                "Tên tài khoản hoặc mật khẩu không chính xác."
-            );
-            return;
-        }
+    if (!user || user.password !== password) {
+      showMessage(
+        "loginMessage",
+        "Tên tài khoản hoặc mật khẩu không chính xác."
+      );
+      return;
+    }
 
-        try {
-            localStorage.setItem("techstore_user", user.username);
-        } catch {
-            showMessage("loginMessage", "Không thể lưu trạng thái đăng nhập.");
-            return;
-        }
+    try {
+      localStorage.setItem("techstore_user", user.username);
+    } catch {
+      showMessage("loginMessage", "Không thể lưu trạng thái đăng nhập.");
+      return;
+    }
 
-        showMessage("loginMessage", "Đăng nhập thành công!", true);
+    showMessage("loginMessage", "Đăng nhập thành công!", true);
 
-        setTimeout(function () {
-            window.location.href = "index.html";
-        }, 700);
-    });
+    setTimeout(function () {
+      window.location.href = "index.html";
+    }, 700);
+  });
 }
